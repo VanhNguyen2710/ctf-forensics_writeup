@@ -1,5 +1,5 @@
 ---
-title: 'Lải nhải vài chall for của DreamHack, vì đề đại số khó quá'
+title: 'vài chall for của DreamHack'
 
 ---
 
