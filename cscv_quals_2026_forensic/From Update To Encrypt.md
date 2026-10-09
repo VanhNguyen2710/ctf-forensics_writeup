@@ -47,6 +47,13 @@ sau đó ghép lại thành định dạng hostname|PID|campaign
 
 <img width="1536" height="60" alt="image" src="https://github.com/user-attachments/assets/2882f19e-8a6e-4166-8c4e-655b5682c6fc" />
 
+sau đó băm và dùng thuật toán sha256 để tạo ra 32 bytes khóa
+
+<img width="1503" height="563" alt="image" src="https://github.com/user-attachments/assets/df31eb24-a77a-4eae-b7f6-3cfc5e7f8a3e" />
+
+
+
+
 
 
 
