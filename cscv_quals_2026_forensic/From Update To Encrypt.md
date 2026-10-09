@@ -51,6 +51,31 @@ sau đó băm và dùng thuật toán sha256 để tạo ra 32 bytes khóa
 
 <img width="1503" height="563" alt="image" src="https://github.com/user-attachments/assets/df31eb24-a77a-4eae-b7f6-3cfc5e7f8a3e" />
 
+sau khi finish hash ta thấy có một hàm sub_405F20() nên ta truy cập vào để xem sau khi tạo khóa thì nó sẽ làm gì, 
+
+<img width="1536" height="567" alt="image" src="https://github.com/user-attachments/assets/2b01d585-52f0-4876-a4de-45df35e0fdd8" />
+
+ta thấy nó gọi một hàm là sub_405C90 với lpWideCharStr = lpFileName[0]; trỏ đến phần tử đầu tiên trong đường dẫn và lpFileName[1] là phần tử cuối của đường dẫn-> sub_405C90 rất có thể đang mã hóa file thuộc đường dẫn này.
+
+ở trong sub_405C90 thì nó có một hàm để tạo nonce tức iv mà ta thường thấy trong mã hóa aes với 12 byte được tạo ngẫu nhiên bằng hàm BCryptGenRandom
+
+<img width="896" height="135" alt="image" src="https://github.com/user-attachments/assets/6145ed45-d4f1-43b6-826d-f711a68e72e1" />
+
+ở đây ta có thể thấy nó đang thực hiện mã hóa và xóa file với sub_404FA0 rất có thể đât là hàm dùng để mã hóa và sau đó tiến hành xóa file qua hàm __std_fs_remove
+
+<img width="1476" height="462" alt="image" src="https://github.com/user-attachments/assets/770a53ab-fe6a-4f12-9b9b-eb2f74256af4" />
+
+trong sub_404FA0 ta thấy được nó đang tiến hành mã hóa bằng AES-GCM
+
+<img width="1163" height="185" alt="image" src="https://github.com/user-attachments/assets/e996d20f-8397-4641-a1bf-084e0120657e" />
+
+<img width="1355" height="501" alt="image" src="https://github.com/user-attachments/assets/2518c8b9-bc2f-4382-9dc6-63e9bce53cca" />
+
+bởi vì iv được tạo ra ngẫu nhiên nên chúng ta vẫn còn thiếu iv để tiến hành giải mã được các file bị mã hóa, ta quay lại sub_405C90 để xem sau khi nó gọi hàm mã hóa nó sẽ làm gì tiếp theo thì thấy sub_404F00 đang lưu lại nonce, rất có thể vì đây là mã độc ransosm tống tiền nên attacker vẫn cần để có thể giải mã sau khi user trả tiền hoặc với một ý đồ khác.
+<img width="1532" height="541" alt="image" src="https://github.com/user-attachments/assets/feb0236a-9414-4844-88cb-8047bfe27b0b" />
+
+
+
 
 
 
