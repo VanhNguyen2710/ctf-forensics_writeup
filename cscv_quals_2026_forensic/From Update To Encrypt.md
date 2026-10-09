@@ -29,6 +29,23 @@ sau đó ở dưới ta thấy rằng sub_408070 đang khởi tạo một url v�
 
 <img width="1112" height="61" alt="image" src="https://github.com/user-attachments/assets/cdb2840a-c993-400c-a8c7-cda2c720eddc" />
 
+sau khi malware thực hiện tương tác với url thì malware này nó sẽ gọi sub_406940 rồi trích xuất campaign còn nếu server ko trả ra chuỗi thì nó sẽ đi tới label 121.
+
+<img width="908" height="41" alt="image" src="https://github.com/user-attachments/assets/70ae1ca3-b359-4282-aa9b-94ccc41a7799" />
+
+<img width="692" height="35" alt="image" src="https://github.com/user-attachments/assets/1602a137-b18b-4f08-8734-6dd3191e6360" />
+
+sau đó tiến hành đổi từ hoa sang thường sau khi lấy computername.
+
+<img width="1365" height="422" alt="image" src="https://github.com/user-attachments/assets/6b0f9ee9-4dcf-4722-a8a3-20008d03e6a2" />
+
+rồi đổi pid number từ dạng số sang dãng chuỗi tức từ int sang string.
+
+<img width="1493" height="187" alt="image" src="https://github.com/user-attachments/assets/b26cb37b-ff7c-44ea-8c8f-21fc42812c0e" />
+
+
+
+
 
 
 
