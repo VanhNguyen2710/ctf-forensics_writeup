@@ -21,6 +21,14 @@ ta thấy từ đề bài mình biết được rằng nhân viên VuVT đã ch�
 
 <img width="847" height="252" alt="Screenshot 2026-10-08 171751" src="https://github.com/user-attachments/assets/78e655e3-741c-4b4a-8408-b35392e1989d" />
 
+đầu tiên ta thấy được rằng con malware này nó lấy computer name và pid của session.
+
+<img width="1318" height="417" alt="image" src="https://github.com/user-attachments/assets/38ec8003-ced2-4d8d-a816-d651b8bae894" />
+
+sau đó ở dưới ta thấy rằng sub_408070 đang khởi tạo một url và sau đó hàm sub_406500 tiến hành tương tác với url đó bằng WinHttpOpen.
+
+<img width="1112" height="61" alt="image" src="https://github.com/user-attachments/assets/cdb2840a-c993-400c-a8c7-cda2c720eddc" />
+
 
 
 
