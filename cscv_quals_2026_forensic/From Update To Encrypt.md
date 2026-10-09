@@ -43,7 +43,7 @@ rồi đổi pid number từ dạng số sang dãng chuỗi tức từ int sang 
 
 <img width="1493" height="187" alt="image" src="https://github.com/user-attachments/assets/b26cb37b-ff7c-44ea-8c8f-21fc42812c0e" />
 
-sau đó ghép lại thành định dạng abc|abc|abc
+sau đó ghép lại thành định dạng hostname|PID|campaign
 
 <img width="1536" height="60" alt="image" src="https://github.com/user-attachments/assets/2882f19e-8a6e-4166-8c4e-655b5682c6fc" />
 
