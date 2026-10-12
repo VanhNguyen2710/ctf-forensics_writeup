@@ -72,7 +72,11 @@ trong sub_404FA0 ta thấy được nó đang tiến hành mã hóa bằng AES-G
 <img width="1355" height="501" alt="image" src="https://github.com/user-attachments/assets/2518c8b9-bc2f-4382-9dc6-63e9bce53cca" />
 
 bởi vì iv được tạo ra ngẫu nhiên nên chúng ta vẫn còn thiếu iv để tiến hành giải mã được các file bị mã hóa, ta quay lại sub_405C90 để xem sau khi nó gọi hàm mã hóa nó sẽ làm gì tiếp theo thì thấy sub_404F00 đang lưu lại nonce, rất có thể vì đây là mã độc ransosm tống tiền nên attacker vẫn cần để có thể giải mã sau khi user trả tiền hoặc với một ý đồ khác.
+
 <img width="1532" height="541" alt="image" src="https://github.com/user-attachments/assets/feb0236a-9414-4844-88cb-8047bfe27b0b" />
+ở đây ta thấy mã độc lấy 8 byte mã nhận diện, 4 byte mã kiểm tra và cộng với 12 byte nonce sau đó lưu vào ram theo cấu trúc [ Mã nhận diện file ][ Nonce ][ Mã kiểm tra ]
+
+<img width="1536" height="686" alt="image" src="https://github.com/user-attachments/assets/2f15bb85-f903-4c4d-ae61-ea53c092357c" />
 
 
 
