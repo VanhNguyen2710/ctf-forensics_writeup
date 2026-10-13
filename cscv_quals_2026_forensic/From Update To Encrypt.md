@@ -145,9 +145,32 @@ Found 14 candidate record(s).
 ````
 ở đây 
 flag.jpeg.enc có nonce là	97595686149cf7a4afe5cd6f theo file id ta tính dựa theo logic của hàm sub_404510
-vậy ta đã thu được nonce giờ cần tìm thêm key để có thể giải mã, trước đó ta đã biết key gồm
+vậy ta đã thu được nonce giờ cần tìm thêm key để có thể giải mã, trước đó ta đã biết key gồm hostname|pid|campagin dưới dạng hex và với hostname và pid ta có thể tìm từ sysmon log của máy vì khi con malware hoạt động log của tiến trình này sẽ được chạy từ đó biết pid và host name, campaign là từ một request trên web vậy nên có thể suy luận ta có thể thu được qua lưu luognjw mạng được lưu vào pcap
 
+<img width="1888" height="1015" alt="image" src="https://github.com/user-attachments/assets/0379488f-9b82-449a-a089-8010f75b3402" />
 
+khi ptich pcap ta có thể thấy ip 192.168.56.10 đang tải malware về như ban đầu ta điều tra vậy nên nếu malware lấy campaign thì chỉ có thể là từ ip này gửi tới đâu đó
 
+<img width="1862" height="21" alt="image" src="https://github.com/user-attachments/assets/e88c56ff-49e8-4d48-86de-69ad9fb1517a" />
 
+ở đây khi vào conservation và kiểm tra giao tiếp thì ta thấy ip này có kết nối tới 1 port rất lạ là 8080 (thực ra ko lạ lắm vì ta biết trước trong ida rồi) còn port 1337 ta biết là chỗ ip này down malware về
 
+<img width="1632" height="142" alt="image" src="https://github.com/user-attachments/assets/642f4138-79dc-4ac8-994e-d033e8e8723d" />
+
+sau đó ta filter theo tcp.port == 8080 thì thấy được campaign cần tìm
+
+<img width="1917" height="1020" alt="image" src="https://github.com/user-attachments/assets/9156f1c4-a034-486b-bfc1-a6d9f7b560ba" />
+
+-> có key đầy đủ và ta sẽ chuyển nó về dạng hex để giải mã, dạng hex của nó là 3c0249e672188f75d3f6a845d534ecfc1bdd2c7c681562393f636d24d4409830 
+có key và iv ta có thể tiến hành giải mã qua cyberchef nhưng iv của ta chỉ là 12 byte tức nó ko phải dạng cbc mà là gcm do cbc là 16 byte lận, ngoài ra trong file còn có 1 dạng kiểu 8 byte magic tức malware thêm vào để nhận diện là file bị mã hóa +16 byte gcm tag( được tạo ra để check iv và key có đúng không) và cuối cùng phần còn lại là cyphertext
+ta sẽ tiến hành lấy gcm tag tức start từ 8 rồi lấy 16 byte rồi chuyển đoạn đó sang dạng hex sau đó loại bỏ 24 byte trong file gốc và ta sẽ giải mã thành công
+
+<img width="1167" height="551" alt="image" src="https://github.com/user-attachments/assets/b33c4fe9-96d3-44ff-936d-97efd3e820fb" />
+
+<img width="1170" height="548" alt="image" src="https://github.com/user-attachments/assets/4b26a267-5681-4020-92f9-279e13b5cb7c" />
+
+cơ mà file flag này thì lại ko có flag mất rồi nên ta cứ làm tương tự với mấy file kia rồi cũng sẽ ra flag thôi, flag mình tìm được nằm ở hi.txt.enc với nonce khác là 24c696f9341fd8e7882b44f0
+
+<img width="1911" height="915" alt="image" src="https://github.com/user-attachments/assets/d6c10fe4-d240-4cf3-afe7-dd151bcefa35" />
+
+->flag: CSCV2026{c0rr3l4t3_b3f0r3_d3crypt}
