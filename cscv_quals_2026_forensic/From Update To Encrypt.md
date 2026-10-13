@@ -73,14 +73,14 @@ trong sub_404FA0 ta thấy được nó đang tiến hành mã hóa bằng AES-G
 
 <img width="1355" height="501" alt="image" src="https://github.com/user-attachments/assets/2518c8b9-bc2f-4382-9dc6-63e9bce53cca" />
 
-bởi vì iv được tạo ra ngẫu nhiên nên chúng ta vẫn còn thiếu iv để tiến hành giải mã được các file bị mã hóa, ta quay lại sub_405C90 để xem sau khi nó gọi hàm mã hóa nó sẽ làm gì tiếp theo thì thấy sub_404F00 đang lưu lại nonce, rất có thể vì đây là mã độc ransosm tống tiền nên attacker vẫn cần để có thể giải mã sau khi user trả tiền hoặc với một ý đồ khác.
+bởi vì iv được tạo ra ngẫu nhiên nên chúng ta vẫn còn thiếu iv để tiến hành giải mã được các file bị mã hóa, ta quay lại sub_405C90 để xem sau khi nó gọi hàm mã hóa nó sẽ làm gì tiếp theo thì thấy sub_404F00 đang lưu lại nonce vào ram.
 
 <img width="1532" height="541" alt="image" src="https://github.com/user-attachments/assets/feb0236a-9414-4844-88cb-8047bfe27b0b" />
 ở đây ta thấy nó lấy 8 byte mã nhận diện, 4 byte mã kiểm tra và cộng với 12 byte nonce sau đó lưu vào ram theo cấu trúc [ Mã nhận diện file ][ Nonce ][ Mã kiểm tra ] rồi lưu vào ram vậy nên đây sẽ là hướng tiếp theo mình đi để tìm ra được nonce nhằm mục đích giải mã
 
 <img width="1536" height="686" alt="image" src="https://github.com/user-attachments/assets/2f15bb85-f903-4c4d-ae61-ea53c092357c" />
 
-theo cấu trúc ta biết được ban đầu nó tạo ra 8 byte nhận diện và lưu vào trước tức nó sẽ từ offset 0-7 sau đó lưu 8 byte nonce tức là sẽ từ 8-15 2 cái này sẽ lưu vào v8 theo đúng thứ tự nhận diện là low còn nonce là high, tiếp đó nó lưu thêm 4 byte nonce offset 16–19 vào low của v9 và 4 byte check vào high của v9 tức offset 20–23. Sau đó cái check sẽ được xor với một hằng số cố định đây sẽ là ý tưởng để ta giải quyết được, nó lưu vào ram vậy thì để tìm kiếm những cái có khả năng là nonce ta sẽ tạo một script quét ram vì ta biết được khi ransom mã hóa một bản như flag.txt thành .enc hay gì đó nó sẽ lưu vào ram đoạn 24 byte vừa phân tích, khi tìm được đoạn đấy ta sẽ check xem coi id tự tính để ra check khi xor với hằng số có bằng với giá trị trong ram ko từ đó xác định được mã 24 byte này có phải dùng để mã hóa file đó hay ko.
+theo cấu trúc ta biết được ban đầu nó tạo ra 8 byte nhận diện và lưu vào trước tức nó sẽ từ offset 0-7 sau đó lưu 8 byte nonce tức là sẽ từ 8-15 2 cái này sẽ lưu vào v8 theo đúng thứ tự nhận diện là low còn nonce là high, tiếp đó nó lưu thêm 4 byte nonce offset 16–19 vào low của v9 và 4 byte check vào high của v9 tức offset 20–23. Sau đó cái check sẽ được tạo bằng file id xor với một hằng số cố định đây sẽ là ý tưởng để ta giải quyết được, nó lưu vào ram vậy thì để tìm kiếm những cái có khả năng là nonce ta sẽ tạo một script quét ram vì ta biết được khi ransom mã hóa một bản như flag.txt thành .enc hay gì đó nó sẽ lưu vào ram đoạn 24 byte vừa phân tích, khi tìm được đoạn đấy ta sẽ check xem coi id tự tính để ra check khi xor với hằng số có bằng với giá trị trong ram ko từ đó xác định được mã 24 byte này có phải dùng để mã hóa file đó hay ko.
 script mình dùng 
 ````
 import argparse
@@ -163,8 +163,8 @@ sau đó ta filter theo tcp.port == 8080 thì thấy được campaign cần tì
 
 <img width="1917" height="1020" alt="image" src="https://github.com/user-attachments/assets/9156f1c4-a034-486b-bfc1-a6d9f7b560ba" />
 
--> có key đầy đủ và ta sẽ chuyển nó về dạng hex để giải mã, dạng hex của nó là 3c0249e672188f75d3f6a845d534ecfc1bdd2c7c681562393f636d24d4409830 
-có key và iv ta có thể tiến hành giải mã qua cyberchef nhưng iv của ta chỉ là 12 byte tức nó ko phải dạng cbc mà là gcm do cbc là 16 byte lận, ngoài ra trong file còn có 1 dạng kiểu 8 byte magic tức malware thêm vào để nhận diện là file bị mã hóa +16 byte gcm tag( được tạo ra để check iv và key có đúng không) và cuối cùng phần còn lại là cyphertext
+-> có key đầy đủ và ta sẽ chuyển nó về dạng sha256 để giải mã, dạng sha256 của nó là 3c0249e672188f75d3f6a845d534ecfc1bdd2c7c681562393f636d24d4409830 
+có key và iv ta có thể tiến hành giải mã qua cyberchef nhưng iv của ta chỉ là 12 byte tức nó ko phải dạng cbc mà là gcm ( trong ida cũng có đề cập ChainingModeGCM), ngoài ra trong file còn có 1 dạng kiểu 8 byte magic tức malware thêm vào để nhận diện là file bị mã hóa +16 byte gcm tag( được tạo ra để check iv và key có chính xác không cũng như tính toàn vẹn của cyphertext) và cuối cùng phần còn lại là cyphertext
 ta sẽ tiến hành lấy gcm tag tức start từ 8 rồi lấy 16 byte rồi chuyển đoạn đó sang dạng hex sau đó loại bỏ 24 byte trong file gốc và ta sẽ giải mã thành công
 
 <img width="1167" height="551" alt="image" src="https://github.com/user-attachments/assets/b33c4fe9-96d3-44ff-936d-97efd3e820fb" />
