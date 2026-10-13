@@ -78,6 +78,7 @@ bởi vì iv được tạo ra ngẫu nhiên nên chúng ta vẫn còn thiếu i
 
 <img width="1536" height="686" alt="image" src="https://github.com/user-attachments/assets/2f15bb85-f903-4c4d-ae61-ea53c092357c" />
 
+theo cấu trúc ta biết được ban đầu nó tạo ra 8 byte nhận diện và lưu vào trước tức nó sẽ từ offset 0-7 sau đó lưu 8 byte nonce tức là sẽ từ 8-15 2 cái này sẽ lưu vào v8 theo đúng thứ tự nhận diện là high còn nonce là low, tiếp đó nó lưu thêm 4 byte nonce offset 16–19 vào high của v9 và 4 byte check vào low của v9 tức offset 20–23.
 
 
 
