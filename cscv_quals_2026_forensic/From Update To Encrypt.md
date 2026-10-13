@@ -16,6 +16,8 @@ Ring... tuttt... tuttt....
 SOC: Moshi moshi, Is that you Vu?
 ````
 ta thấy từ đề bài mình biết được rằng nhân viên VuVT đã chạy một file update hoặc gì đó và sau đó các dữ liệu trong máy đã bị mã hóa rất có thể là một cuộc tấn công ransomware. Đề muốn ta tìm ra thông tin để khôi phục kết quả rất có thể muốn ta tìm được key hoặc phương thức mã hóa từ đó đảo ngược quy trình và lấy lại dữ liệu rất có thể dữ liệu đó chứa flag.
+dữ liệu cần khôi phục có lẽ là flag đã bị encrypt bởi ransom
+<img width="1176" height="487" alt="image" src="https://github.com/user-attachments/assets/e0fb20bb-5f92-4103-8e7b-115d8b81e0e3" />
 
 Ở trong download của user bkav ta thấy được một folder có tên update và bên trong là 2 file update.exe và updater.exe rất có thể đây là con malware gây nên sự cố này này.
 
@@ -79,10 +81,71 @@ bởi vì iv được tạo ra ngẫu nhiên nên chúng ta vẫn còn thiếu i
 <img width="1536" height="686" alt="image" src="https://github.com/user-attachments/assets/2f15bb85-f903-4c4d-ae61-ea53c092357c" />
 
 theo cấu trúc ta biết được ban đầu nó tạo ra 8 byte nhận diện và lưu vào trước tức nó sẽ từ offset 0-7 sau đó lưu 8 byte nonce tức là sẽ từ 8-15 2 cái này sẽ lưu vào v8 theo đúng thứ tự nhận diện là low còn nonce là high, tiếp đó nó lưu thêm 4 byte nonce offset 16–19 vào low của v9 và 4 byte check vào high của v9 tức offset 20–23. Sau đó cái check sẽ được xor với một hằng số cố định đây sẽ là ý tưởng để ta giải quyết được, nó lưu vào ram vậy thì để tìm kiếm những cái có khả năng là nonce ta sẽ tạo một script quét ram vì ta biết được khi ransom mã hóa một bản như flag.txt thành .enc hay gì đó nó sẽ lưu vào ram đoạn 24 byte vừa phân tích, khi tìm được đoạn đấy ta sẽ check xem coi id tự tính để ra check khi xor với hằng số có bằng với giá trị trong ram ko từ đó xác định được mã 24 byte này có phải dùng để mã hóa file đó hay ko.
+script mình dùng 
+````
+import argparse
+import mmap
+import struct
+import sys
+
+MAGIC = 0xA17C4E29
+RECORD_SIZE = 24
+UINT32 = struct.Struct('<I')
 
 
+def scan_ram(path):
+    found = 0
+    with open(path, 'rb') as f:
+        f.seek(0, 2)
+        size = f.tell()
+        f.seek(0)
+        if size < RECORD_SIZE:
+            print('RAM dump is too small for a 24-byte record.', file=sys.stderr)
+            return
+
+        with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as ram:
+            for offset in range(size - RECORD_SIZE + 1):
+                file_id_low = UINT32.unpack_from(ram, offset)[0]
+                check = UINT32.unpack_from(ram, offset + 20)[0]
+                if (file_id_low ^ MAGIC) != check:
+                    continue
+
+                file_id_bytes = ram[offset:offset + 8]
+                nonce = ram[offset + 8:offset + 20]
+                print(f'offset=0x{offset:x} file_id={file_id_bytes.hex()} '
+                      f'nonce={nonce.hex()} check=0x{check:08x}')
+                found += 1
+
+    print(f'Found {found} candidate record(s).', file=sys.stderr)
 
 
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Find 24-byte nonce records in a RAM dump')
+    parser.add_argument('ram', help='Path to mem.raw')
+    args = parser.parse_args()
+    scan_ram(args.ram)
+````
+khi chạy xong script kết quả ta thu được
+````
+offset=0x45322d20 file_id=09bf333824d1c1bb nonce=f13ba19b255ae4f590c25cfd check=0x994ff120
+offset=0x45322d38 file_id=b412dea421fb3e14 nonce=df8f031f5e50e9b0eaea27ff check=0x05a25c9d
+offset=0x45322d50 file_id=d9597923064b29ce nonce=97595686149cf7a4afe5cd6f check=0x820517f0
+offset=0x45322d68 file_id=dccc0e51a39631e4 nonce=24c696f9341fd8e7882b44f0 check=0xf07282f5
+offset=0x45322d80 file_id=ce7ce4992f5fb13c nonce=5a3ea1093656db3093d8df16 check=0x389832e7
+offset=0x45322d98 file_id=8119e0d3f82dc644 nonce=257c8a8ff3bf9cb6cdddce85 check=0x729c57a8
+offset=0x45322db0 file_id=520fb18cf905e12d nonce=adea20882fde1b4d6e74f57c check=0x2dcd417b
+offset=0x6d95bd20 file_id=09bf333824d1c1bb nonce=f13ba19b255ae4f590c25cfd check=0x994ff120
+offset=0x6d95bd38 file_id=b412dea421fb3e14 nonce=df8f031f5e50e9b0eaea27ff check=0x05a25c9d
+offset=0x6d95bd50 file_id=d9597923064b29ce nonce=97595686149cf7a4afe5cd6f check=0x820517f0
+offset=0x6d95bd68 file_id=dccc0e51a39631e4 nonce=24c696f9341fd8e7882b44f0 check=0xf07282f5
+offset=0x6d95bd80 file_id=ce7ce4992f5fb13c nonce=5a3ea1093656db3093d8df16 check=0x389832e7
+offset=0x6d95bd98 file_id=8119e0d3f82dc644 nonce=257c8a8ff3bf9cb6cdddce85 check=0x729c57a8
+offset=0x6d95bdb0 file_id=520fb18cf905e12d nonce=adea20882fde1b4d6e74f57c check=0x2dcd417b
+Found 14 candidate record(s).
+````
+ở đây 
+flag.jpeg.enc có nonce là	97595686149cf7a4afe5cd6f theo file id ta tính dựa theo logic của hàm sub_404510
+vậy ta đã thu được nonce giờ cần tìm thêm key để có thể giải mã, trước đó ta đã biết key gồm
 
 
 
