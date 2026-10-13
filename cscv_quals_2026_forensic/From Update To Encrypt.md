@@ -145,10 +145,11 @@ Found 14 candidate record(s).
 ````
 ở đây 
 flag.jpeg.enc có nonce là	97595686149cf7a4afe5cd6f theo file id ta tính dựa theo logic của hàm sub_404510
-vậy ta đã thu được nonce giờ cần tìm thêm key để có thể giải mã, trước đó ta đã biết key gồm hostname|pid|campagin dưới dạng hex và với hostname và pid ta có thể tìm từ sysmon log của máy vì khi con malware hoạt động log của tiến trình này sẽ được chạy từ đó biết pid và host name, campaign là từ một request trên web vậy nên có thể suy luận ta có thể thu được qua lưu luognjw mạng được lưu vào pcap
+vậy ta đã thu được nonce giờ cần tìm thêm key để có thể giải mã, trước đó ta đã biết key gồm hostname|pid|campagin dưới dạng hex và với hostname và pid ta có thể tìm từ sysmon log của máy vì khi con malware hoạt động log của tiến trình này sẽ được chạy từ đó biết pid và host name, campaign là từ một request trên web vậy nên có thể suy luận ta có thể thu được qua lưu luognwj mạng được lưu vào pcap
 
 <img width="1888" height="1015" alt="image" src="https://github.com/user-attachments/assets/0379488f-9b82-449a-a089-8010f75b3402" />
 
+ta có được 2 phần đầu là host name và pid gồm DESKTOP-7NNKNIK và 2844
 khi ptich pcap ta có thể thấy ip 192.168.56.10 đang tải malware về như ban đầu ta điều tra vậy nên nếu malware lấy campaign thì chỉ có thể là từ ip này gửi tới đâu đó
 
 <img width="1862" height="21" alt="image" src="https://github.com/user-attachments/assets/e88c56ff-49e8-4d48-86de-69ad9fb1517a" />
@@ -157,7 +158,8 @@ khi ptich pcap ta có thể thấy ip 192.168.56.10 đang tải malware về nh�
 
 <img width="1632" height="142" alt="image" src="https://github.com/user-attachments/assets/642f4138-79dc-4ac8-994e-d033e8e8723d" />
 
-sau đó ta filter theo tcp.port == 8080 thì thấy được campaign cần tìm
+sau đó ta filter theo tcp.port == 8080 thì thấy được campaign cần tìm đó là X7A91C
+
 
 <img width="1917" height="1020" alt="image" src="https://github.com/user-attachments/assets/9156f1c4-a034-486b-bfc1-a6d9f7b560ba" />
 
