@@ -2,6 +2,7 @@ FOR04
 author:nhoktiger12
 
 đề bài cấp cho ta một file .ad1 khi ta connect vào netcat để bắt đầu trả lời câu hỏi, câu 1 của đề là
+
 Q1: When was the Windows Data Deduplication feature first installed on the system?
 
 
