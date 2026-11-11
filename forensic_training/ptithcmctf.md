@@ -107,7 +107,14 @@ ta sẽ tìm tới chunkstore và trích xuất 2 file .ccc ở data và stream 
 
 Q12: What is the data length in bytes of the first deduplicated chunk belonging to the report file under investigation?
 
-ở câu trước ta biết kích thước của file là 88.47kb, 
+ở đây Theo tài liệu Forensic analysis of deduplicated file systems của hai tác giả Dario Lanterna và Antonio Barili (https://dfrws.org/sites/default/files/session-files/2017_EU_paper_forensic_analysis_of_deduplicated_file_systems.pdf?). ta biết rằng tại offset tương đối 0x78 trong Reparse Point có một chuỗi byte dùng để nhận diện stream của file đó.
+
+<img width="1917" height="907" alt="image" src="https://github.com/user-attachments/assets/9af57b3a-18bf-4bdf-a3da-62bc39a5fbb0" />
+
+ban đầu ta có 0xB9B0 là vị trí bắt đầu của REPARSE_POINT vậy 0xB9B0 + 0x78 = 0xBA28, ta sẽ lấy len(30) tức 30 byte đây là chuỗi để nhận diện được stream của file Internal Consolidated Financial Statements 2024.docx.
+
+<img width="1407" height="712" alt="image" src="https://github.com/user-attachments/assets/d0f9e4d6-f7ff-4571-8d25-f82f33bbbcb6" />
+
 
 FOR01
 author:KAiZ3n
