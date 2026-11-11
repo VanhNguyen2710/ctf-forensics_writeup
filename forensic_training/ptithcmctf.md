@@ -92,13 +92,19 @@ tức vị trí của First Attribute Offset nó sẽ nằm trong khoảng vị 
 
 <img width="835" height="332" alt="image" src="https://github.com/user-attachments/assets/afcf7183-9b68-4749-8386-e742691d29ce" />
 
-
-<img width="853" height="167" alt="image" src="https://github.com/user-attachments/assets/82f00af6-8f0d-4b4e-8925-29e67bc3764e" />
-
 ta kết luận được thuộc tính đầu tiên ở offset cách điểm khởi đầu 0x38 -> 0xB800 + 0x38 = 0xB838, khi đã có điểm khởi đầu ta sẽ cộng các size cho tới reparse point 
 0xB838+0x60(StandardInformation)+0xC8(FileName)+0x50(Data)=0x0000b9b0(ReparsePoint)
 
 ->Q10:0x0000b9b0
+
+Q11:After the report was optimized by Data Deduplication, into how many chunks was its data divided?
+
+ta sẽ tìm tới chunkstore và trích xuất 2 file .ccc ở data và stream sau đó dùng tool dedupexplorer.exe(https://github.com/7h3kn0w3r/DedupInspector/releases)
+
+<img width="1098" height="672" alt="image" src="https://github.com/user-attachments/assets/59952738-99ed-426b-9fc5-5e982dddef11" />
+
+->Q11:2
+
 
 FOR01
 author:KAiZ3n
