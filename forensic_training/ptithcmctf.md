@@ -1,3 +1,4 @@
+Đây là solution 2 bài for mình may mắn first blood trong giải ptithcmctf của mình. Ngoài ra trong giải thì có 1 bài 6/7 chưa kịp xong thì hết giờ nên cũng sẽ giải nốt bài đó trong này luôn.  
 FOR04
 author:nhoktiger12
 
@@ -132,6 +133,44 @@ sau khi tới được đó ta thấy được đáp án
 <img width="1408" height="717" alt="image" src="https://github.com/user-attachments/assets/b523eaa3-a41e-41a3-9c4b-6ef011815bff" />
 
 ->Q12:61095
+
+Q13:After recovering the file, provide the SHA-256 hash of the recovered financial report.
+
+ta biết rằng entry+0x70 sẽ ra được vị trí bắt đầu của tham chiếu của chunk đầu tiên -> 0x52D0 và ta cũng biết luôn rằng mỗi tham chiếu chunk chiếm 0x40 byte vậy thì bắt đầu tham chiếu của chunk 2 sẽ là 0x52D0+0x40 = 0x5310 có thể hiểu rằng tham chiếu tức là ta sẽ dùng chuỗi này để grep trong data từ đó mới khôi phục được file gốc. Trong này có nói At 0x78 there is the absolute position in the chunkstore nghĩa là 0x8 từ vị trí xuất phát chứa địa chỉ
+
+<img width="487" height="510" alt="image" src="https://github.com/user-attachments/assets/1ddf0f2f-f68e-4517-b9b6-a8186129d426" />
+
+<img width="1412" height="721" alt="image" src="https://github.com/user-attachments/assets/794e310a-e746-4396-b726-4efaf422b228" />
+
+sau khi đảo byte ta được 0x000000010006CE20 và 00000001 là Data container số 1, tương ứng 00000001.00000001.ccc cái sau là offset 0x6CE20, chunk 2 làm tương tự và ta có offset 0x7BD20.
+
+ở Q12 ta đã có size của chunk 1 rồi chunk 2 ta cũng làm tương tự vì tham chiếu các chunk cách nhau đúng 0x40 như nãy ở trên đã nói vậy cái chỗ chứa size cũng có thể tìm ra offset bằng cách tương tự 0x5308 + 0x40 = 0x5348. Ta có size chunk 2 là 29498. Dựa vào size ta có thể suy ra 2 byte cuối của 2 chunk bằng công thức byte cuối=byte đầu + size - 1. Việc còn lại chỉ là bôi đen các offset của 2 chunk rồi ghép lại thôi.
+
+<img width="1411" height="708" alt="image" src="https://github.com/user-attachments/assets/41f738d5-3a74-4cf5-a441-76a849677f8b" />
+
+SHA-256 hash của file là e51e773e5404f29cc2816cff3fbdcc8b2c28f9e8040a6e7fe926b21336b66513
+
+<img width="1436" height="92" alt="image" src="https://github.com/user-attachments/assets/221280de-9934-415a-9cc6-948330c103f3" />
+
+->Q13: e51e773e5404f29cc2816cff3fbdcc8b2c28f9e8040a6e7fe926b21336b66513
+
+Q14:Who is the author of the recovered financial report?
+
+câu này mở info của word là thấy thôi 
+
+<img width="1917" height="1003" alt="image" src="https://github.com/user-attachments/assets/bad9234d-b4ff-4f24-bee7-fe1f4a984d72" />
+
+->Q14: Elaine Chua
+
+Q15: How much was the profit for the year overstated in the audited report compared to the actual one?
+
+<img width="852" height="596" alt="image" src="https://github.com/user-attachments/assets/293c8705-1fc8-4896-b11d-537434659f29" />
+
+ở đây lỗ 1.647.555 mà tổng phân bổ ở cuối ghi lời 2.672.196 tức là bị khai khống 
+
+2.672.196-(-1.647.555)=4.319.751
+
+->Q15:4319751
 
 FOR01
 author:KAiZ3n
