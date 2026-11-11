@@ -99,7 +99,7 @@ ta kết luận được thuộc tính đầu tiên ở offset cách điểm kh�
 
 Q11:After the report was optimized by Data Deduplication, into how many chunks was its data divided?
 
-ta sẽ tìm tới chunkstore và trích xuất 2 file .ccc ở data và stream sau đó dùng tool dedupexplorer.exe(https://github.com/7h3kn0w3r/DedupInspector/releases)
+ta sẽ tìm tới chunkstore và trích xuất 2 file .ccc ở data và stream sau đó dùng tool dedup explorer(https://github.com/7h3kn0w3r/DedupInspector/releases)
 
 <img width="1098" height="672" alt="image" src="https://github.com/user-attachments/assets/59952738-99ed-426b-9fc5-5e982dddef11" />
 
