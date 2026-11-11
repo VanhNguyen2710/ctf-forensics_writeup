@@ -11,8 +11,11 @@ khi một feature được cài vào hệ thống thì ta sẽ nghĩ ngay tới 
 
 ta tìm được đáp án, đổi 16:56:40 của giờ việt nam ra utc ta sẽ có 09:56:40 và theo định dạng câu hỏi cần thêm ngày tháng năm theo format yyyy-mm-dd thì đáp án cần điền là 2025-09-18 09:56:40
 
-->q1:2025-09-18 09:56:40
+->Q1:2025-09-18 09:56:40
 
+Q2:How many bytes of disk space were saved after the first optimization job was completed by Data Deduplication?
+
+ở đây ta sẽ tìm theo event id 6153 vì đó là event khi một tác vụ deduplication hoàn tất nó nằm trong log Microsoft-Windows-Deduplication_4Operational.evtx, ta có khung thời gian từ trước vậy nên log sẽ nằm quanh khung thời gian sau khi cài đặt. 
 FOR01
 author:KAiZ3n
 An organization has detected signs of compromise on a workstation and a Domain Controller following a suspicious incident involving a document sent to a user.
