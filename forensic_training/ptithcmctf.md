@@ -105,6 +105,9 @@ ta sẽ tìm tới chunkstore và trích xuất 2 file .ccc ở data và stream 
 
 ->Q11:2
 
+Q12: What is the data length in bytes of the first deduplicated chunk belonging to the report file under investigation?
+
+ở câu trước ta biết kích thước của file là 88.47kb, 
 
 FOR01
 author:KAiZ3n
