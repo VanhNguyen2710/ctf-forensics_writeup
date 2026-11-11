@@ -129,7 +129,7 @@ theo cấu trúc Smap, ta biết rằng The value at offset 0xA8 is the length o
 
 sau khi tới được đó ta thấy được đáp án
 
-<img width="1417" height="703" alt="image" src="https://github.com/user-attachments/assets/a2e11a52-ad0b-4aeb-b9db-4b16ff3fda8c" />
+<img width="1408" height="717" alt="image" src="https://github.com/user-attachments/assets/b523eaa3-a41e-41a3-9c4b-6ef011815bff" />
 
 ->Q12:61095
 
