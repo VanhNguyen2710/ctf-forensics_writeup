@@ -60,7 +60,7 @@ trong này ta thấy rằng <StartBoundary>2025-09-20T06:50:00</StartBoundary> n
 
 Q7:What is the name of the financial report that was recently deleted in an attempt to cover up criminal activity?
 
-ở đây đề muốn hỏi cái báo cáo tài chính nào bị xóa, ta sẽ dùng mft explorer để xem %MFT vì đây là bảng ghi thông tin về các file trên phân vùng ntfs của window, khi xóa report hoàn toàn thì rất có thể nó vẫn còn lưu file đã xóa trên mft.
+ở đây đề muốn hỏi cái báo cáo tài chính nào bị xóa, ta sẽ dùng mft explorer để xem %MFT vì đây là bảng ghi thông tin về các file trên phân vùng ntfs của window, khi xóa report thì rất có thể thông tin của nó vẫn còn lưu lại mft từ đó có thể suy ra hướng tìm.
 
 <img width="1627" height="965" alt="image" src="https://github.com/user-attachments/assets/14c89cef-cce7-4240-a7a0-8dec6244c400" />
 
