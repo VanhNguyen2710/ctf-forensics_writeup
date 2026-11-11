@@ -16,6 +16,10 @@ ta tìm được đáp án, đổi 16:56:40 của giờ việt nam ra utc ta s�
 Q2:How many bytes of disk space were saved after the first optimization job was completed by Data Deduplication?
 
 ở đây ta sẽ tìm theo event id 6153 vì đó là event khi một tác vụ deduplication hoàn tất nó nằm trong log Microsoft-Windows-Deduplication_4Operational.evtx, ta có khung thời gian từ trước vậy nên log sẽ nằm quanh khung thời gian sau khi cài đặt. 
+khi tìm theo ta có được 
+<img width="1917" height="1015" alt="image" src="https://github.com/user-attachments/assets/fb86c619-a038-400c-8e25-77c9acabe926" />
+ở đây bytes tiết kiệm được là 6805707
+
 FOR01
 author:KAiZ3n
 An organization has detected signs of compromise on a workstation and a Domain Controller following a suspicious incident involving a document sent to a user.
