@@ -115,6 +115,23 @@ ban đầu ta có 0xB9B0 là vị trí bắt đầu của REPARSE_POINT vậy 0x
 
 <img width="1407" height="712" alt="image" src="https://github.com/user-attachments/assets/d0f9e4d6-f7ff-4571-8d25-f82f33bbbcb6" />
 
+ta sẽ tìm cái chuỗi nhận diện đó bên file .ccc ở folder stream
+
+<img width="1400" height="707" alt="image" src="https://github.com/user-attachments/assets/e9ac23aa-03b5-42f4-afea-206c16cce4a0" />
+
+tại đây ta thấy được Smap cái này nó cho ta biết thứ tự các chunk và vị trí kết thúc của từng chunk trong file gốc.
+
+<img width="1412" height="502" alt="image" src="https://github.com/user-attachments/assets/e788e1aa-a053-42d4-881d-05362276e224" />
+
+theo cấu trúc Smap, ta biết rằng The value at offset 0xA8 is the length of the chunk payload tức là ở offset đầu tiên, chuỗi nhận diện ta biết là Ckhr + 0x38 vậy khi trừ 0x38 ta sẽ có entry của Ckhr, 0x5298 - 0x38 = 0x5260 sau đó lấy 0x5260+0xA8=0x5308
+
+<img width="1913" height="885" alt="image" src="https://github.com/user-attachments/assets/9e3eed34-9976-472b-9056-56575e5d341e" />
+
+sau khi tới được đó ta thấy được đáp án
+
+<img width="1417" height="703" alt="image" src="https://github.com/user-attachments/assets/a2e11a52-ad0b-4aeb-b9db-4b16ff3fda8c" />
+
+->Q12:61095
 
 FOR01
 author:KAiZ3n
