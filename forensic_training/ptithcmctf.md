@@ -66,6 +66,40 @@ Q7:What is the name of the financial report that was recently deleted in an atte
 
 ->Q7:Internal Consolidated Financial Statements 2024.docx
 
+Q8:What is the MFT entry number of that report file?
+
+ở đây ta có thể thấy luôn entry number là 46
+
+<img width="1622" height="967" alt="image" src="https://github.com/user-attachments/assets/0b65a5bf-87db-481a-ab00-108b6477fbfa" />
+
+->Q8:46
+
+Q9: List all the FILE_ATTRIBUTE flags that are set on the report file. Submit answer in ascending order based on the hex value of each flag.
+trong phần details ta thấy được 3 phần của FILE_ATTRIBUTE flags
+Flags: Archive|SparseFile|ReparsePoint
+
+<img width="1626" height="966" alt="image" src="https://github.com/user-attachments/assets/635eee59-3f10-4526-973a-0ea2af9e66d7" />
+
+->Q9:FILE_ATTRIBUTE_ARCHIVE, FILE_ATTRIBUTE_SPARSE_FILE, FILE_ATTRIBUTE_REPARSE_POINT
+
+Q10:At what offset in the $MFT file does the $REPARSE_POINT attribute of the report begin? (Answer as an 8-digit hexadecimal offset, prefixed with 0x)
+
+ta biết rằng First Attribute Offset thường nằm trong khoảng byte 0x14 đến 0x15
+
+<img width="853" height="167" alt="image" src="https://github.com/user-attachments/assets/0579972b-3db1-4c63-9af2-e4f2bd0087b2" />
+
+tức vị trí của First Attribute Offset nó sẽ nằm trong khoảng vị trí bắt đầu của mft+0x14 mà trước đó ta biết vị trí bắt đầu của mft là Offset: 0xB800, ta sẽ tìm First Attribute Offset ở 0xB814.
+
+<img width="835" height="332" alt="image" src="https://github.com/user-attachments/assets/afcf7183-9b68-4749-8386-e742691d29ce" />
+
+
+<img width="853" height="167" alt="image" src="https://github.com/user-attachments/assets/82f00af6-8f0d-4b4e-8925-29e67bc3764e" />
+
+ta kết luận được thuộc tính đầu tiên ở offset cách điểm khởi đầu 0x38 -> 0xB800 + 0x38 = 0xB838, khi đã có điểm khởi đầu ta sẽ cộng các size cho tới reparse point 
+0xB838+0x60(StandardInformation)+0xC8(FileName)+0x50(Data)=0x0000b9b0(ReparsePoint)
+
+->Q10:0x0000b9b0
+
 FOR01
 author:KAiZ3n
 An organization has detected signs of compromise on a workstation and a Domain Controller following a suspicious incident involving a document sent to a user.
