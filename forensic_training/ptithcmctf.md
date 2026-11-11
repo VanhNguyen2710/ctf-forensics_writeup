@@ -58,6 +58,14 @@ trong này ta thấy rằng <StartBoundary>2025-09-20T06:50:00</StartBoundary> n
 
 ->Q6:2025-09-25 06:50:00
 
+Q7:What is the name of the financial report that was recently deleted in an attempt to cover up criminal activity?
+
+ở đây đề muốn hỏi cái báo cáo tài chính nào bị xóa, ta sẽ dùng mft explorer để xem %MFT vì đây là bảng ghi thông tin về các file trên phân vùng ntfs của window, khi xóa report hoàn toàn thì rất có thể nó vẫn còn lưu file đã xóa trên mft.
+
+<img width="1627" height="965" alt="image" src="https://github.com/user-attachments/assets/14c89cef-cce7-4240-a7a0-8dec6244c400" />
+
+->Q7:Internal Consolidated Financial Statements 2024.docx
+
 FOR01
 author:KAiZ3n
 An organization has detected signs of compromise on a workstation and a Domain Controller following a suspicious incident involving a document sent to a user.
