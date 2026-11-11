@@ -41,11 +41,22 @@ trong file xml có đáp án luôn gồm các trường excludeFileExtensions v�
 ->Q4:avi, bak, edb, iso, jrs, mp4, tif
 
 Q5:How many files have been optimized by Data Deduplication?
+
 ở đây khi check lần optimize cuối cùng ta thấy nó tối ưu được 168 file
 
 <img width="1917" height="1017" alt="image" src="https://github.com/user-attachments/assets/2ae6f46a-df12-40aa-a1c7-173a3b660214" />
 
 ->Q5:168
+
+Q6:When is the next Throughput Optimisation job scheduled to run?
+
+ta check throughputoptimization ở ổ đĩa C nơi quản lý các task schedule của window cụ thể nó sẽ lưu vào C:\Windows\System32\Tasks
+
+<img width="1917" height="1021" alt="image" src="https://github.com/user-attachments/assets/b8ad5e6e-7c2b-4f77-9355-211f501637e7" />
+
+trong này ta thấy rằng <StartBoundary>2025-09-20T06:50:00</StartBoundary> nghĩa là ngày lịch có hiệu lực, và nó chạy vào mỗi thứ 5 hằng tuần tức lịch dedup tiếp theo sẽ rơi vào t5 tuần sau tức 2025-09-25 06:50:00 vì 2025-20-9 là t7.
+
+->Q6:2025-09-25 06:50:00
 
 FOR01
 author:KAiZ3n
