@@ -180,7 +180,7 @@ The Incident Response (IR) team has collected forensic artifacts from both the e
 
 Your task is to analyze the evidence, reconstruct the attack chain, and explain how the attacker pivoted from the compromised workstation into the Active Directory infrastructure.
 
-Q1:Full URL contacted by the suspicious payload
+Q1: Full URL contacted by the suspicious payload 
 
 theo đề ta biết được rằng sự việc xảy ra liên quan đến một tệp tài liệu bất ngờ. Khi kiểm tra ta thấy được một file document.pdf tuy nhiên nó là một file shortcut chứ không phải pdf thông thường. 
 
@@ -195,3 +195,16 @@ decode ra ta thấy được link và đáp án câu 1
 <img width="1916" height="910" alt="image" src="https://github.com/user-attachments/assets/d07ddfcc-5f61-47fd-a5ac-7fe99ae39da0" />
 
 Q1:http://192.168.56.1:9091/s.ps1
+
+Q2:Persistence technique ID
+
+ta kiểm tra những technique persistence phổ biến của window như startup, sheduled task, services và registry. Khi kiểm tra NTUSER.DAT ta sẽ chú tâm tới Run Key vì nó cho phép chương trình tự động chạy khi đăng nhập vào tuy nhiên khi kiểm tra ta lại không thấy gì đáng ngờ
+
+<img width="1917" height="1020" alt="image" src="https://github.com/user-attachments/assets/2d3477c1-9eb3-4e8c-8893-8ebac45dc17f" />
+
+Ngoài ra trong lúc làm mình nảy ra ý tưởng là tìm lệnh trong memory để xem file ps1 nó làm gì hoặc biết đâu nó cho ta manh mối thì vô tình thấy được
+
+<img width="1445" height="46" alt="image" src="https://github.com/user-attachments/assets/abe11866-4691-4c59-b7ef-4806717419cd" />
+
+
+
