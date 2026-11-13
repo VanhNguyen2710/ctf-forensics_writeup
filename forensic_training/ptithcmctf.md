@@ -202,9 +202,23 @@ ta kiểm tra những technique persistence phổ biến của window như start
 
 <img width="1917" height="1020" alt="image" src="https://github.com/user-attachments/assets/2d3477c1-9eb3-4e8c-8893-8ebac45dc17f" />
 
-Ngoài ra trong lúc làm mình nảy ra ý tưởng là tìm lệnh trong memory để xem file ps1 nó làm gì hoặc biết đâu nó cho ta manh mối thì vô tình thấy được
+Ngoài ra trong lúc làm mình nảy ra ý tưởng là tìm lệnh trong memory để xem file ps1 nó làm gì hoặc biết đâu nó cho ta manh mối thì vô tình thấy được một file dllhost.exe nằm ở vị trí bất thường. Thông thương thì dllhost.exe nó phải nằm ở những vị trí như C:\Windows\System32\dllhost.exe hoặc C:\Windows\SysWOW64\dllhost.exe nhưng ở đây nó lại nằm ở một đường dẫn khá kì lạ nên rất có thẻ đó là file độc hại. 
 
 <img width="1445" height="46" alt="image" src="https://github.com/user-attachments/assets/abe11866-4691-4c59-b7ef-4806717419cd" />
 
+ta biết được rằng trên window có một cơ chế tên là COM nó được dùng khi chương trình cần sử dụng một chức năng từ một ứng dụng khác và để tránh gây lỗi bởi cơ chế COM nó sẽ được đưa vào dllhost.exe và chạy trong đó để nếu COM có lỗi gì cũng không ảnh hưởng tới chương trình gốc.
 
+<img width="872" height="143" alt="image" src="https://github.com/user-attachments/assets/a0b53f4a-aa4d-4f7c-ab56-850f81dfed6b" />
+
+vì vậy rất có thể COM đã bị lợi dụng để chạy chương trình, thêm nữa cái dllhost này nó nằm trong user thong từ đó ta nghĩ ngay tới kiểm tra UsrClass.dat của user thong vì đây là file lưu thông tin đăng ký COM của riêng user thong.
+
+từ câu 1 ta đã biết ip của attacker rồi vậy nên khi grep trong UsrClass.dat ta biết được rằng attacker đã đăng ký một TypeLib trỏ đến scriptlet trên máy chủ attacker script:http://192.168.56.1:9091/launch.sct 
+
+<img width="1917" height="1020" alt="image" src="https://github.com/user-attachments/assets/557e3750-44ea-4066-97b3-75e0ae891f1d" />
+
+vậy thì với việc có một dllhost.exe nằm ở vị trí bất thường sau đó sửa COM để chuyển hướng sang một script độc hại ta có thể suy ra com hijacking giwof chỉ việc tra id thôi
+
+<img width="870" height="137" alt="image" src="https://github.com/user-attachments/assets/fdb06cfa-2578-4f41-8bb1-ce1ce5534b87" />
+
+->Q2:T1546.015
 
