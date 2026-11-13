@@ -179,3 +179,19 @@ An organization has detected signs of compromise on a workstation and a Domain C
 The Incident Response (IR) team has collected forensic artifacts from both the endpoint and the Domain Controller.
 
 Your task is to analyze the evidence, reconstruct the attack chain, and explain how the attacker pivoted from the compromised workstation into the Active Directory infrastructure.
+
+Q1:Full URL contacted by the suspicious payload
+
+theo đề ta biết được rằng sự việc xảy ra liên quan đến một tệp tài liệu bất ngờ. Khi kiểm tra ta thấy được một file document.pdf tuy nhiên nó là một file shortcut chứ không phải pdf thông thường. 
+
+<img width="815" height="222" alt="image" src="https://github.com/user-attachments/assets/e1757734-bb78-40da-811c-d5f12dde2ed1" />
+
+sau khi dùng linkinfo để kiểm tra thì ở đây ta thấy shortcut thực ra là mở powershell sau đó chạy lệnh
+
+<img width="1442" height="160" alt="image" src="https://github.com/user-attachments/assets/a67a347f-0d3d-401d-b2b8-ad76c6150945" />
+
+decode ra ta thấy được link và đáp án câu 1 
+
+<img width="1916" height="910" alt="image" src="https://github.com/user-attachments/assets/d07ddfcc-5f61-47fd-a5ac-7fe99ae39da0" />
+
+Q1:http://192.168.56.1:9091/s.ps1
