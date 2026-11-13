@@ -186,7 +186,7 @@ theo đề ta biết được rằng sự việc xảy ra liên quan đến mộ
 
 <img width="815" height="222" alt="image" src="https://github.com/user-attachments/assets/e1757734-bb78-40da-811c-d5f12dde2ed1" />
 
-sau khi dùng linkinfo để kiểm tra thì ở đây ta thấy shortcut thực ra là mở powershell sau đó chạy lệnh
+sau khi dùng linkinfo để kiểm tra thì ở đây ta thấy shortcut thực ra là mở powershell sau đó chạy lệnh đã được mã hóa bằng -enc và trong window thì cái này nó sẽ chuyển plaintext thành UTF-16LE rồi base64encode ta chỉ việc làm ngược lại
 
 <img width="1442" height="160" alt="image" src="https://github.com/user-attachments/assets/a67a347f-0d3d-401d-b2b8-ad76c6150945" />
 
