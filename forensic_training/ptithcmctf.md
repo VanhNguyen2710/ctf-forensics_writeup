@@ -227,3 +227,5 @@ Q3: Persistence registry path
 trong hình ta cũng đã thấy path luôn rồi
 
 ->Q3:HKCU\Software\Classes\TypeLib\{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}\1.1\0\win64
+
+Q4:What is the full filesystem path of the malicious executable?
