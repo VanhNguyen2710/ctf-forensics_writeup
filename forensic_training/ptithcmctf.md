@@ -234,11 +234,42 @@ khi dùng pstree để kiểm tra mối quan hệ cha con của các process th�
 
 <img width="1457" height="140" alt="image" src="https://github.com/user-attachments/assets/5a33271f-f0fc-4f38-8766-4f22f38acbea" />
 
-khi dùng thêm netscan để check thì ta vô tình thấy rằng notepad này cũng mở một kết nối mạng ra ngoài và tình cờ cái ip này trùng với ip tải file độc ban đầu ta thấy và chỉ khác port thôi
+khi dùng thêm netscan để check thì ta vô tình thấy rằng notepad này cũng mở một kết nối mạng ra ngoài và tình cờ cái ip này trùng với ip tải file độc ban đầu ta thấy và chỉ khác port thôi 192.168.56.1:4442
 
 <img width="1462" height="71" alt="image" src="https://github.com/user-attachments/assets/4a530ebe-b3e5-440d-ae33-5709c4918e9a" />
 
 cơ mà thực ra cái này để chắc chắn thôi chứ ban đầu mình cũng biết là cái dllhost.exe kia rồi, mà đường dẫn sẽ có 2 dấu \\ thay vì cái ta thấy trong cmdline.
 
 Q4:C:\\Users\\thong\\AppData\\Roaming\\Microsoft\\Update\\dllhost.exe
+
+Q5: Api đã thực thi shell code
+
+ở đây ta xác định được dllhost.exe là mã độc vậy nên ta sẽ dump và dùng ida để mở nó lên.
+
+<img width="1917" height="825" alt="image" src="https://github.com/user-attachments/assets/f898d082-4491-4050-bbf7-13e0602ed331" />
+
+ta thấy ở start nó return về 1 hàm sub_7FF65A1F15B0 nên ta đi vào đó kiểm tra
+
+<img width="565" height="168" alt="image" src="https://github.com/user-attachments/assets/f87c0a84-4d1f-4a0f-9dfc-038bb4df1c6e" />
+
+trong này ta thấy v8 = hàm sub_7FF65A1F1010() sau đó thực thi và return v8, những cái kia chỉ là return 255LL không phải hàm gì đặc biệt, RtlFailFast thì là hàm window thường dùng cho những trường hợp chương trình gặp lỗi vì vậy suy ra ta sẽ cần để tâm tới hàm trong v8 này.
+
+<img width="1917" height="825" alt="image" src="https://github.com/user-attachments/assets/bfe0d7e2-6d09-4838-8450-316b3518ffd1" />
+
+trong hàm ta thấy có một đoạn ở dòng 137 nó xử lý 509 byte, mỗi byte dữ liệu xor với 1 byte trong 8 byte khóa xor, hết 8 byte thì bắt đầu lại từ byte key đầu sau đó kết quả chép vào vùng ram. Tức là con dllhost.exe này ban đầu đã mã hóa mã độc và khi kích hoạt thì nó mới giải mã chép đoạn mã vào vùng ram được cấp sau đó cấp quyền thực thi ( 32 trong VirtualFree_10 tức là cho phép đọc và thực thi) cho mã và chạy bằng cách lợi dụng hàm EnumDesktopsW để gọi EnumFunc rồi chạy shellcode
+
+<img width="1268" height="242" alt="image" src="https://github.com/user-attachments/assets/c84de77c-1886-49b0-944b-df0cfb140f88" />
+
+<img width="1090" height="568" alt="image" src="https://github.com/user-attachments/assets/ea0aa822-2dfd-4003-bd4e-4bbdbd8a3e17" />
+
+<img width="1533" height="232" alt="image" src="https://github.com/user-attachments/assets/11760767-8ca5-42d7-8c80-2200662757d0" />
+
+->Q5:EnumDesktopsW
+
+Q6:C2 Address
+
+cái này ta tìm được từ trước thông qua netscan rồi
+->Q6:192.168.56.1:4442
+
+
 
