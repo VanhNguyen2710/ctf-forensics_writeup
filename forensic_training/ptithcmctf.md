@@ -234,4 +234,11 @@ khi dùng pstree để kiểm tra mối quan hệ cha con của các process th�
 
 <img width="1457" height="140" alt="image" src="https://github.com/user-attachments/assets/5a33271f-f0fc-4f38-8766-4f22f38acbea" />
 
+khi dùng thêm netscan để check thì ta vô tình thấy rằng notepad này cũng mở một kết nối mạng ra ngoài và tình cờ cái ip này trùng với ip tải file độc ban đầu ta thấy và chỉ khác port thôi
+
+<img width="1462" height="71" alt="image" src="https://github.com/user-attachments/assets/4a530ebe-b3e5-440d-ae33-5709c4918e9a" />
+
+cơ mà thực ra cái này để chắc chắn thôi chứ ban đầu mình cũng biết là cái dllhost.exe kia rồi, mà đường dẫn sẽ có 2 dấu \\ thay vì cái ta thấy trong cmdline.
+
+Q4:C:\\Users\\thong\\AppData\\Roaming\\Microsoft\\Update\\dllhost.exe
 
