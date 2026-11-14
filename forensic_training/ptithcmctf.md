@@ -229,3 +229,9 @@ trong hình ta cũng đã thấy path luôn rồi
 ->Q3:HKCU\Software\Classes\TypeLib\{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}\1.1\0\win64
 
 Q4:What is the full filesystem path of the malicious executable?
+
+khi dùng pstree để kiểm tra mối quan hệ cha con của các process thì ta thấy được rằng dllhost.exe đã tạo ra một tiến trình notepad.exe
+
+<img width="1457" height="140" alt="image" src="https://github.com/user-attachments/assets/5a33271f-f0fc-4f38-8766-4f22f38acbea" />
+
+
